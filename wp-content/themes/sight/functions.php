@@ -929,15 +929,4 @@ function issue_excerpt($issue_id){
     return join('  &middot;  ', $author_list);
 }
 
-function assign_issues_to_verbatims(){
-    global $cpt_onomy;
-    $post_issues = array(2593 => 4693,2592 => 4693,2591 => 4693,2590 => 4693,2589 => 4693,2588 => 4693,2587 => 4693,2586 => 4693,2585 => 4693,2584 => 4693,2583 => 4693,2582 => 4693,2581 => 4693,2580 => 4693,2579 => 4693,2578 => 4693,2577 => 4693,2201 => 4696,2200 => 4696,2199 => 4696,2198 => 4696,2196 => 4696,2195 => 4696,2194 => 4696,2193 => 4696,2192 => 4696,2191 => 4696,2190 => 4696,2189 => 4696,2188 => 4696,);
-    foreach ($post_issues as $post_id => $issue_id){
-        $cpt_onomy->wp_set_object_terms( $post_id , $issue_id, 'issue' );
-    }
-}
-
-// add_action('wp_footer', 'assign_issues_to_verbatims');
-
-
 ?>
