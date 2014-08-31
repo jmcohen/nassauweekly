@@ -2,8 +2,15 @@
 
  <?php
     $issue_slug = get_query_var('issue');
-    $issues_ = get_posts(array('name' => $issue_slug, 'posts_per_page' => 1, 'post_type' => 'issue',  'post_status' => 'publish'));
-    $issue = $issues_[0];
+    query_posts(array('name' => $issue_slug, 'posts_per_page' => 1, 'post_type' => 'issue',  'post_status' => 'publish'));
+    the_post();
+    $issue = get_post();
+    $previous_issue = get_previous_post();
+    $next_issue = get_next_post();
+
+    function format_issue_date($issue) {
+        return date_format(new DateTime($issue->post_date), 'F d, Y'); 
+    }
  ?>
 
 <?php if (has_post_thumbnail($issue->ID)) { ?>
@@ -14,8 +21,10 @@
 
 <div class="issue-info">
 <div class="issue-title"><?php echo $issue->post_title;?></div>
-<div class="issue-date"><?php echo date_format(new DateTime($issue->post_date), 'F d, Y'); ?></div>
+<div class="issue-date"><?php echo format_issue_date($issue) ?></div>
 </div>
+
+<?php wp_reset_query();?>
 
 <?php query_posts(array('post_type' => 'post','posts_per_page' => '100','issue' => $issue->ID)); ?>
 
@@ -58,5 +67,32 @@
     }
     wp_reset_postdata();
 ?>
+
+<div class="adjacent-issues">
+    <div class="col left">
+        <?php if ($previous_issue): ?>
+            <a class="issue-link" href="<?php echo get_permalink($previous_issue->ID)?>" style="float: left;">
+                &larr; &nbsp;
+                <?php echo format_issue_date($previous_issue); ?>
+            </a>
+        <?php endif; ?>
+    </div>
+
+    <div class="col middle">
+        <p class="issue-link current" style="text-align: center;">
+            <?php echo format_issue_date($issue); ?>
+        </p>
+    </div>
+
+    <div class="col right">
+        <?php if ($next_issue): ?>
+            <a class="issue-link" href="<?php echo get_permalink($next_issue->ID)?>" style="float: right;" >
+                <?php echo format_issue_date($next_issue); ?>
+                &nbsp; &rarr; 
+
+            </a>
+        <?php endif; ?>
+    </div>
+</div>
 
 <?php get_footer(); ?>
