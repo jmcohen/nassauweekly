@@ -661,6 +661,12 @@ function twittercount($twitter_url='http://twitter.com/wpshower') {
 	echo $xml[0]->followers_count;
 }
 
+function get_issue_title($issue_slug) {
+    $issue_posts_ = get_posts(array('name' => $issue_slug, 'post_type' => 'issue', 'post_status' => 'publish', 'posts_per_page' => 1));
+    $issue_post = $issue_posts_[0];
+    return $issue_post->post_title;
+}
+
 function seo_title() {
     global $page, $paged;
     $sep = " | "; # delimiter
@@ -686,8 +692,14 @@ function seo_title() {
     if (is_tax()) {
         $curr_tax = get_taxonomy(get_query_var('taxonomy'));
         $curr_term = get_term_by('slug', get_query_var('term'), get_query_var('taxonomy')); # current term data
+        if (get_query_var('taxonomy') == 'byline') {
+            $newtitle = $curr_term->name;
+        } else if (get_query_var('taxonomy') == 'issue'){         
+            $issue_slug = get_query_var('issue');
+            $newtitle = get_issue_title($issue_slug);
+        }
         # if it's term
-        if (!empty($curr_term)) {
+        else if (!empty($curr_term)) {
             $newtitle = $curr_tax->label . $sep . $curr_term->name;
         } else {
             $newtitle = $curr_tax->label;
@@ -700,10 +712,11 @@ function seo_title() {
 
     # Home & Front Page ########################################
     if (is_home() || is_front_page()) {
-        $newtitle = get_bloginfo('name');//. $sep . get_bloginfo('description');
+        $newtitle = get_bloginfo('name');
     } else {
         $newtitle .=  $sep . get_bloginfo('name');
     }
+
 	return $newtitle;
 }
 add_filter('wp_title', 'seo_title');
