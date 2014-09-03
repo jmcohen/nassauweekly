@@ -71,25 +71,30 @@
 <div class="adjacent-issues">
     <div class="col left">
         <?php if ($previous_issue): ?>
-            <a class="issue-link" href="<?php echo get_permalink($previous_issue->ID)?>" style="float: left;">
-                &larr; &nbsp;
+            <span class="arrow">&larr;</span>
+            <a class="issue-link" href="<?php echo get_permalink($previous_issue->ID)?>">
                 <?php echo format_issue_date($previous_issue); ?>
+                <br />
+                <?php echo $previous_issue->post_title ?>
             </a>
         <?php endif; ?>
     </div>
 
     <div class="col middle">
-        <p class="issue-link current" style="text-align: center;">
+        <p class="issue-link current">
             <?php echo format_issue_date($issue); ?>
+            <br />
+            <?php echo $issue->post_title ?>
         </p>
     </div>
 
     <div class="col right">
         <?php if ($next_issue): ?>
-            <a class="issue-link" href="<?php echo get_permalink($next_issue->ID)?>" style="float: right;" >
+            <span class="arrow">&rarr;</span>
+            <a class="issue-link" href="<?php echo get_permalink($next_issue->ID)?>">
                 <?php echo format_issue_date($next_issue); ?>
-                &nbsp; &rarr; 
-
+                <br />
+                <?php echo $next_issue->post_title ?>
             </a>
         <?php endif; ?>
     </div>

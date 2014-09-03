@@ -417,10 +417,12 @@ p.copyright span {color: #737373;}
 
 .adjacent-issues {float: left; margin: 20px 30px; padding-top: 20px; width: 610px; border-top: solid #eee 2px; }
 .adjacent-issues .col {width: 33%;}
-.adjacent-issues .col.left {float: left;}
-.adjacent-issues .col.right {float: right;}
+.adjacent-issues .col.left > * {float: left; text-align: left;}
+.adjacent-issues .col.right > * {float: right; text-align: right;}
 .adjacent-issues .col.middle {display: inline-block;}
+.adjacent-issues .col.middle > * {text-align: center;}
 .adjacent-issues .col a {color: black;}
-.adjacent-issues .col .issue-link {text-decoration: none; display: block; font-size: 14px; margin-top: 5px;}
+.adjacent-issues .col .arrow {font-size: 14px;}
+.adjacent-issues .col .issue-link {text-decoration: none; display: block; font-size: 14px; line-height: 22px; margin: 0px 8px;}
 .adjacent-issues .col a.issue-link:hover {text-decoration: underline;}
 .adjacent-issues .col .issue-link.current {color: #999;}
