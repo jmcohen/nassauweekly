@@ -929,4 +929,52 @@ function issue_excerpt($issue_id){
     return join('  &middot;  ', $author_list);
 }
 
+/*
+    display the "more by the same author" widget:
+    lists a fixed number of randomly chosen articles written by author
+    of the article currently being viewed.
+ */
+function echo_more_articles() {
+    // choose one of the authors (most articles just have one)
+    $bylines_ = wp_get_post_terms(get_the_ID(), 'byline');
+    shuffle($bylines_);
+    $byline_slug = $bylines_[0]->slug;
+    $byline_name = $bylines_[0]->name;
+        
+    // get 3 random articles by the same author 
+    $num_more_articles = 3;
+    $posts = get_posts(
+        array(
+            'posts_per_page' => $num_more_articles,
+            'orderby' => 'rand',
+            'post__not_in' => array(get_the_ID()), // exclude the current post, naturally
+            'byline' => $byline_slug,
+        )
+    );
+
+    if (empty($posts)) {
+        return;
+    }
+
+    $links = array();
+    foreach ($posts as $post) {
+        $issue = reset(get_the_terms($post->ID, 'issue'));
+         array_push($links, '<li><p><a href="'.get_permalink($post->ID).
+            '">'.$post->post_title.'</a> <span class="gray">in <a href="/issue/'.
+            $issue->slug.'"> '.$issue->name.'</span></p></li>');
+    }
+
+    ?>
+    <div class="more-widget">
+        <h3>More by <?php echo $byline_name; ?> </h3>
+        <div class="widget-body clear">
+            <ul>
+                <?php echo join('', $links); ?>
+            </ul>
+        </div>
+    </div>
+  <?php
+}
+
+
 ?>

@@ -274,16 +274,26 @@ p#cancel-comment-reply {float: right; line-height: 28px; margin: 0;}
 
 /*** Sidebar ***/
 
-.sidebar {width: 275px; padding: 4px 30px 0 0; float: right;}
+.sidebar {width: 275px; padding: 4px 30px 0 0; float: right; position: relative;}
 .widget {margin-bottom: 35px;}
 .widget-small {width: 130px;}
-.widget h3, .widget-small h3 {color: #1f2122; font-size: 14px; font-weight: normal; text-transform: uppercase; padding-bottom: 15px; margin-bottom: 20px; border-bottom: 1px solid #d9d9d9;}
+.widget h3, .widget-small h3 {color: #1f2122; font-size: 14px; font-weight: normal; text-transform: uppercase; padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid #d9d9d9;}
 .widget a, .widget-small a {color: #000; text-decoration: none;}
 .widget a:hover, .widget-small a:hover {text-decoration: underline;}
 .widget p, .textwidget {color: #262626; font: 12px/1.3 Helvetica, Arial, sans-serif;}
 .widget p a, .textwidget a {text-decoration: underline;}
 .widget p a:hover, .textwidget a:hover {text-decoration: none;}
 .widget li, .widget-small li {font-size: 12px; color: #262626; margin-bottom: 3px;}
+
+/* the "more by the same author" sidebar widget */
+.more-widget {position: absolute; bottom: 200px; padding: 14px; border-left: solid 1px #eee;}
+.more-widget h3{color: black; font-size: 16px; font-weight: normal; padding-bottom: 6px; margin-bottom: 10px; border-bottom: 1px solid #eee;}
+.more-widget a {text-decoration: none;}
+.more-widget a:hover {text-decoration: underline;}
+.more-widget li {margin-bottom: 16px;}
+.more-widget li p {color: #000; font-size: 16px;}
+.more-widget li p a {color: #000;}
+.more-widget li p .gray, .more-widget li p .gray a {color: #aaa;}
 
 .widget_getconnected {margin-bottom: 20px;}
 .widget_getconnected .widget-body div {width: 50%; float: left; min-height: 40px; padding-bottom: 16px;}
@@ -372,7 +382,7 @@ p.copyright span {color: #737373;}
 .issue-posts a {text-decoration: none; color: black;}
 .issue-post a:hover{text-decoration: underline; width: 100%;}
 .issue-post {margin-bottom: 20px; vertical-align: baseline;}
-.issue-post .title {font-style: italic; font-size: 18px;}
+.issue-post .title {font-size: 18px;}
 .issue-post .author { float: right; font-style: normal;}
 .issue-this-weeks-verbatim {width: 100%; font-size: 20px; text-align: center; margin-bottom: 10px; text-transform: uppercase; color: #ccc; clear: left;}
 .issue-verbatim {float: left; margin: 10px 30px; font-size: 16px; width: 610px;}

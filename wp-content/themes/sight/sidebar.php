@@ -13,4 +13,23 @@
     <?php //the_widget( 'GetConnected', 'title=Get Connected', $widget_args); ?>
 
     <?php endif; ?>
+
+    <?php 
+    // if this is an article page, insert the "more by the same author" widget,
+    // which is defined in functions.php
+        if (is_single()) {
+            echo_more_articles();
+        }
+    ?>
+
 </div>
+
+<!-- Automatically set the height of the sidebar to be equal to that of the content.
+     This is crucial for the "more by the same author" widget, which is pinned to the
+     BOTTOM of the page. -->
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        var contentHeight = $('#content').height() - $('#content .comments').height(); 
+        $('.sidebar').height(contentHeight);
+    });
+</script>
